@@ -243,8 +243,8 @@ func NewHead(r prometheus.Registerer, l log.Logger, wal, wbl *wlog.WL, opts *Hea
 	}
 
 	h := &Head{
-		wal:    wal,
-		wbl:    wbl,
+		wal:    nil,
+		wbl:    nil,
 		logger: l,
 		opts:   opts,
 		memChunkPool: sync.Pool{
@@ -268,13 +268,13 @@ func NewHead(r prometheus.Registerer, l log.Logger, wal, wbl *wlog.WL, opts *Hea
 		opts.WALReplayConcurrency = defaultWALReplayConcurrency
 	}
 
-	h.chunkDiskMapper, err = chunks.NewChunkDiskMapper(
+	/*h.chunkDiskMapper, err = chunks.NewChunkDiskMapper(
 		r,
 		mmappedChunksDir(opts.ChunkDirRoot),
 		opts.ChunkPool,
 		opts.ChunkWriteBufferSize,
 		opts.ChunkWriteQueueSize,
-	)
+	)*/
 	if err != nil {
 		return nil, err
 	}
